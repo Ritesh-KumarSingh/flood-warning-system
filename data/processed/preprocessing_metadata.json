@@ -1,0 +1,48 @@
+{
+  "feature_names": [
+    "rainfall_mm",
+    "rainfall_7day_avg",
+    "rainfall_intensity",
+    "river_level_m",
+    "river_level_change",
+    "soil_moisture_percent",
+    "elevation_m",
+    "temperature_celsius",
+    "humidity_percent",
+    "wind_speed_kmh",
+    "distance_to_river_km",
+    "month"
+  ],
+  "target_name": "flood_risk",
+  "n_features": 12,
+  "n_train_samples": 1600,
+  "n_test_samples": 400,
+  "scaler_mean": [
+    105.53801875,
+    71.05808125,
+    10.498112500000001,
+    6.475762500000001,
+    0.9017125,
+    62.69185625,
+    157.13942500000002,
+    26.34663125,
+    77.56248125,
+    22.619893750000003,
+    5.775718749999999,
+    6.75
+  ],
+  "scaler_std": [
+    99.58378623557225,
+    58.59411798982811,
+    9.80181253326872,
+    3.419917128907329,
+    1.191107128827525,
+    21.34582424894471,
+    135.26839906106812,
+    4.845504484986413,
+    10.151191027702042,
+    10.227571983428469,
+    5.511300242084298,
+    2.939387691339814
+  ]
+}

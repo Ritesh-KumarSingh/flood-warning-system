@@ -1,0 +1,73 @@
+# API Configuration
+weather_api:
+  base_url: "https://api.openweathermap.org/data/2.5"
+  api_key: "5b39cb7683e4ffc4d39df357c4636adf"  # Get free key from openweathermap.org
+
+# Model Configuration
+model:
+  type: "RandomForestClassifier"
+  n_estimators: 100
+  random_state: 42
+  test_size: 0.2
+
+# Risk Thresholds (0-1 probability scale)
+risk_levels:
+  safe: 0.3
+  warning: 0.6
+  high_risk: 0.8
+  critical: 1.0
+
+# Alert Messages
+alerts:
+  safe: "No flood risk detected. Weather conditions are normal."
+  warning: "Moderate flood risk. Monitor weather updates and prepare emergency kit."
+  high_risk: "High flood risk expected. Prepare to evacuate if advised."
+  critical: "CRITICAL: Immediate flood danger! Evacuate to higher ground NOW!"
+
+# Data paths
+paths:
+  raw_data: "data/raw/flood_data.csv"
+  processed_data: "data/processed/clean_data.csv"
+  model_save: "data/models/flood_model.pkl"
+```
+
+---
+
+## **STEP 7: Create .gitignore**
+
+Create `.gitignore` file:
+```
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+
+# Jupyter Notebooks
+.ipynb_checkpoints
+
+# Data files (don't commit large datasets)
+*.csv
+*.pkl
+*.h5
+*.parquet
+
+# Config with secrets
+config/secrets.yaml
+.env
+
+# Logs
+logs/
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/

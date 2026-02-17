@@ -1,0 +1,70 @@
+{
+  "training_date": "2026-02-14 15:56:00",
+  "n_estimators": 100,
+  "max_depth": null,
+  "feature_names": [
+    "rainfall_mm",
+    "rainfall_7day_avg",
+    "rainfall_intensity",
+    "river_level_m",
+    "river_level_change",
+    "soil_moisture_percent",
+    "elevation_m",
+    "temperature_celsius",
+    "humidity_percent",
+    "wind_speed_kmh",
+    "distance_to_river_km",
+    "month"
+  ],
+  "feature_importance": [
+    {
+      "feature": "rainfall_7day_avg",
+      "importance": 0.2111460510576586
+    },
+    {
+      "feature": "rainfall_intensity",
+      "importance": 0.16715371966142528
+    },
+    {
+      "feature": "rainfall_mm",
+      "importance": 0.1611069128291621
+    },
+    {
+      "feature": "soil_moisture_percent",
+      "importance": 0.1425839954676198
+    },
+    {
+      "feature": "river_level_m",
+      "importance": 0.13852372192729703
+    },
+    {
+      "feature": "river_level_change",
+      "importance": 0.12073620971647495
+    },
+    {
+      "feature": "distance_to_river_km",
+      "importance": 0.027912643107708347
+    },
+    {
+      "feature": "elevation_m",
+      "importance": 0.02721956848782651
+    },
+    {
+      "feature": "month",
+      "importance": 0.0034215649173786862
+    },
+    {
+      "feature": "temperature_celsius",
+      "importance": 0.00010148377164136821
+    },
+    {
+      "feature": "humidity_percent",
+      "importance": 9.412905580673164e-05
+    },
+    {
+      "feature": "wind_speed_kmh",
+      "importance": 5.764361153882793e-16
+    }
+  ],
+  "model_type": "RandomForestClassifier"
+}
