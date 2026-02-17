@@ -1,6 +1,33 @@
-echo "venv/" > .gitignore
-echo "__pycache__/" >> .gitignore
-echo "*.pyc" >> .gitignore
-echo ".env" >> .gitignore
-echo "*.pkl" >> .gitignore
-echo "outputs/" >> .gitignore
+# Python
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+
+# Environment
+.env
+.env.local
+.venv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Project specific
+outputs/
+*.log
+.pytest_cache/
+
+# Keep model files
+!data/models/*.pkl
+!data/processed/*.pkl
