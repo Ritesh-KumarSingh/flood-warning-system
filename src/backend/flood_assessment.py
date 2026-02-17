@@ -6,33 +6,30 @@ Combines ML prediction with risk scoring for complete assessment
 import sys
 import os
 
-# Add parent directories to path for imports
-sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'ml'))
+# ── path bootstrap (must come before any local imports) ──────────────────────
+_BACKEND_DIR = os.path.dirname(os.path.abspath(__file__))   # src/backend
+_SRC_DIR     = os.path.dirname(_BACKEND_DIR)                # src
+_ML_DIR      = os.path.join(_SRC_DIR, "ml")
+_UTILS_DIR   = os.path.join(_SRC_DIR, "utils")
+for _p in (_ML_DIR, _UTILS_DIR, _BACKEND_DIR):
+    if _p not in sys.path:
+        sys.path.insert(0, _p)
 
-from predict import FloodRiskPredictor
+from predict import get_predictor          # ← factory, never raises FileNotFoundError
 from risk_scoring import RiskScorer, format_alert_for_display
 from typing import Dict, Optional
 
 
 class FloodRiskAssessor:
     """
-    Complete flood risk assessment system
-    Combines ML prediction with risk scoring and alert generation
+    Complete flood risk assessment system.
+    Uses get_predictor() so it works with or without .pkl files.
     """
-    
-    def __init__(self, 
-                 model_path='../../data/models/flood_model.pkl',
-                 scaler_path='../../data/processed/scaler.pkl'):
-        """
-        Initialize assessor with model and scaler
-        
-        Args:
-            model_path: Path to trained model
-            scaler_path: Path to fitted scaler
-        """
+
+    def __init__(self, model_path=None, scaler_path=None):
         print("🚀 Initializing Flood Risk Assessment System...")
-        self.predictor = FloodRiskPredictor(model_path, scaler_path)
-        self.scorer = RiskScorer()
+        self.predictor = get_predictor(model_path, scaler_path)
+        self.scorer    = RiskScorer()
         print("✅ System ready!\n")
     
     def assess_flood_risk(self, 

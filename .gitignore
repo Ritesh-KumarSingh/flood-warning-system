@@ -3,31 +3,27 @@ venv/
 __pycache__/
 *.pyc
 *.pyo
-*.pyd
 .Python
-*.so
-*.egg
 *.egg-info/
 dist/
 build/
 
-# Environment
+# Environment secrets — NEVER commit these
 .env
 .env.local
-.venv
 
 # IDE
 .vscode/
 .idea/
-*.swp
-*.swo
 .DS_Store
+*.swp
 
-# Project specific
-outputs/
+# Logs / temp outputs
 *.log
+outputs/
 .pytest_cache/
 
-# Keep model files
-!data/models/*.pkl
-!data/processed/*.pkl
+# ── IMPORTANT: DO NOT ignore model files ──────────────────────────────────
+# These MUST be committed so Streamlit Cloud can load them.
+# !data/models/*.pkl
+# !data/processed/*.pkl

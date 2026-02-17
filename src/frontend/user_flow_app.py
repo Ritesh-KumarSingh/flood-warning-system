@@ -12,8 +12,15 @@ import time
 from datetime import datetime
 import requests
 
-# Add backend to path
-sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'backend'))
+# ── deployment-safe path bootstrap ──────────────────────────────────────────
+_FRONTEND_DIR = os.path.dirname(os.path.abspath(__file__))
+_SRC_DIR      = os.path.dirname(_FRONTEND_DIR)
+_BACKEND_DIR  = os.path.join(_SRC_DIR, "backend")
+_ML_DIR       = os.path.join(_SRC_DIR, "ml")
+_UTILS_DIR    = os.path.join(_SRC_DIR, "utils")
+for _p in (_BACKEND_DIR, _ML_DIR, _UTILS_DIR):
+    if _p not in sys.path:
+        sys.path.insert(0, _p)
 
 from weather_api import WeatherAPIClient
 from flood_assessment import FloodRiskAssessor
