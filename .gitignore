@@ -1,4 +1,4 @@
-# Python
+﻿# Python
 venv/
 __pycache__/
 *.pyc
@@ -8,7 +8,7 @@ __pycache__/
 dist/
 build/
 
-# Environment secrets — NEVER commit these
+# Secrets - NEVER commit
 .env
 .env.local
 
@@ -18,12 +18,10 @@ build/
 .DS_Store
 *.swp
 
-# Logs / temp outputs
+# Logs
 *.log
 outputs/
 .pytest_cache/
 
-# ── IMPORTANT: DO NOT ignore model files ──────────────────────────────────
-# These MUST be committed so Streamlit Cloud can load them.
-# !data/models/*.pkl
-# !data/processed/*.pkl
+# NOTE: data/models/*.pkl and data/processed/*.pkl are NOT ignored.
+# They MUST be committed so Streamlit Cloud can load the trained model.
