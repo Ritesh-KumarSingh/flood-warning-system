@@ -1,4 +1,4 @@
-"""
+﻿"""
 Integrated Flood Risk Assessment Module
 Combines ML prediction with risk scoring for complete assessment
 """
@@ -6,7 +6,7 @@ Combines ML prediction with risk scoring for complete assessment
 import sys
 import os
 
-# ── path bootstrap (must come before any local imports) ──────────────────────
+# â”€â”€ path bootstrap (must come before any local imports) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 _BACKEND_DIR = os.path.dirname(os.path.abspath(__file__))   # src/backend
 _SRC_DIR     = os.path.dirname(_BACKEND_DIR)                # src
 _ML_DIR      = os.path.join(_SRC_DIR, "ml")
@@ -15,7 +15,7 @@ for _p in (_ML_DIR, _UTILS_DIR, _BACKEND_DIR):
     if _p not in sys.path:
         sys.path.insert(0, _p)
 
-from predict import get_predictor          # ← factory, never raises FileNotFoundError
+from predict import get_predictor          # â† factory, never raises FileNotFoundError
 from risk_scoring import RiskScorer, format_alert_for_display
 from typing import Dict, Optional
 
@@ -27,10 +27,10 @@ class FloodRiskAssessor:
     """
 
     def __init__(self, model_path=None, scaler_path=None):
-        print("🚀 Initializing Flood Risk Assessment System...")
+        print("ðŸš€ Initializing Flood Risk Assessment System...")
         self.predictor = get_predictor(model_path, scaler_path)
         self.scorer    = RiskScorer()
-        print("✅ System ready!\n")
+        print("âœ… System ready!\n")
     
     def assess_flood_risk(self, 
                          features: Dict,
@@ -122,7 +122,7 @@ def run_examples():
     """Run comprehensive examples"""
     
     print("\n" + "="*70)
-    print(" "*15 + "🌊 FLOOD RISK ASSESSMENT SYSTEM")
+    print(" "*15 + "ðŸŒŠ FLOOD RISK ASSESSMENT SYSTEM")
     print("="*70 + "\n")
     
     # Initialize assessor
@@ -231,7 +231,7 @@ def run_examples():
     print()
     
     print("="*70)
-    print("✅ All examples complete!")
+    print("âœ… All examples complete!")
     print("="*70 + "\n")
 
 
