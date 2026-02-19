@@ -1,0 +1,42 @@
+{
+  "disaster_type": "flood",
+  "features": [
+    "rainfall_mm",
+    "rainfall_7day_avg",
+    "rainfall_intensity",
+    "river_level_m",
+    "river_level_change",
+    "soil_moisture_percent",
+    "elevation_m",
+    "temperature_celsius",
+    "humidity_percent",
+    "wind_speed_kmh",
+    "distance_to_river_km",
+    "month"
+  ],
+  "n_features": 12,
+  "n_samples_train": 1600,
+  "n_samples_test": 400,
+  "train_accuracy": 0.993125,
+  "test_accuracy": 0.9525,
+  "feature_importance": {
+    "river_level_m": 0.1902789927719936,
+    "rainfall_mm": 0.1867002201786318,
+    "rainfall_intensity": 0.1825561498030777,
+    "soil_moisture_percent": 0.15327925163570735,
+    "rainfall_7day_avg": 0.09317943826291834,
+    "river_level_change": 0.061244959018128015,
+    "humidity_percent": 0.03546030567100303,
+    "distance_to_river_km": 0.03245831172719926,
+    "elevation_m": 0.03232649826126152,
+    "wind_speed_kmh": 0.013756119267507043,
+    "temperature_celsius": 0.0112225272583347,
+    "month": 0.007537226144237808
+  },
+  "risk_levels": {
+    "0": "Safe",
+    "1": "Warning",
+    "2": "High Risk",
+    "3": "Critical"
+  }
+}

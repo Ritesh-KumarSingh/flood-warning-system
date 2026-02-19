@@ -1,0 +1,42 @@
+{
+  "disaster_type": "cyclone",
+  "features": [
+    "sea_surface_temp_c",
+    "atmospheric_pressure_hpa",
+    "wind_speed_kmh",
+    "wind_shear_kms",
+    "humidity_percent",
+    "coastal_distance_km",
+    "latitude",
+    "coriolis_parameter",
+    "cloud_top_temp_c",
+    "vorticity",
+    "previous_cyclone_30d",
+    "month"
+  ],
+  "n_features": 12,
+  "n_samples_train": 1600,
+  "n_samples_test": 400,
+  "train_accuracy": 0.996875,
+  "test_accuracy": 0.935,
+  "feature_importance": {
+    "sea_surface_temp_c": 0.27219486306521984,
+    "atmospheric_pressure_hpa": 0.2694402458114267,
+    "wind_speed_kmh": 0.11028389464336674,
+    "coastal_distance_km": 0.10622626685934096,
+    "vorticity": 0.059672117535556214,
+    "month": 0.05673127304418537,
+    "wind_shear_kms": 0.026290061352062685,
+    "humidity_percent": 0.02357312616162946,
+    "cloud_top_temp_c": 0.022975565177834043,
+    "latitude": 0.020133544450090555,
+    "coriolis_parameter": 0.019562989278752413,
+    "previous_cyclone_30d": 0.01291605262053507
+  },
+  "risk_levels": {
+    "0": "Safe",
+    "1": "Warning",
+    "2": "High Risk",
+    "3": "Critical"
+  }
+}

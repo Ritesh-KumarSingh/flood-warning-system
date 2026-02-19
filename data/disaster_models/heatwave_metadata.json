@@ -1,0 +1,46 @@
+{
+  "disaster_type": "heatwave",
+  "features": [
+    "temperature_c",
+    "temp_max_c",
+    "temp_min_c",
+    "temp_trend",
+    "humidity_percent",
+    "heat_index",
+    "wind_speed_kmh",
+    "uv_index",
+    "consecutive_hot_days",
+    "urban_area",
+    "soil_moisture_percent",
+    "cloud_cover_percent",
+    "previous_heatwave_30d",
+    "month"
+  ],
+  "n_features": 14,
+  "n_samples_train": 1600,
+  "n_samples_test": 400,
+  "train_accuracy": 0.999375,
+  "test_accuracy": 0.945,
+  "feature_importance": {
+    "heat_index": 0.21131993329831736,
+    "temperature_c": 0.19560108495337997,
+    "uv_index": 0.1238123789771445,
+    "temp_max_c": 0.12188184648990599,
+    "consecutive_hot_days": 0.11573772985282424,
+    "temp_min_c": 0.09489144903026397,
+    "humidity_percent": 0.04651748890398393,
+    "soil_moisture_percent": 0.033198370727380105,
+    "month": 0.016484204078523215,
+    "cloud_cover_percent": 0.014860448591387316,
+    "wind_speed_kmh": 0.014464982091967869,
+    "previous_heatwave_30d": 0.004682033549855205,
+    "temp_trend": 0.004089805235821159,
+    "urban_area": 0.0024582442192451724
+  },
+  "risk_levels": {
+    "0": "Safe",
+    "1": "Warning",
+    "2": "High Risk",
+    "3": "Critical"
+  }
+}

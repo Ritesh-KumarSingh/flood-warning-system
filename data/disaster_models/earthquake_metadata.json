@@ -1,0 +1,46 @@
+{
+  "disaster_type": "earthquake",
+  "features": [
+    "seismic_zone",
+    "ground_acceleration_g",
+    "p_wave_velocity_kms",
+    "s_wave_velocity_kms",
+    "recent_quakes_30d",
+    "max_recent_magnitude",
+    "fault_distance_km",
+    "soil_type",
+    "building_age_years",
+    "bedrock_depth_m",
+    "historical_count_5y",
+    "population_density",
+    "hour_of_day",
+    "month"
+  ],
+  "n_features": 14,
+  "n_samples_train": 1600,
+  "n_samples_test": 400,
+  "train_accuracy": 0.99625,
+  "test_accuracy": 0.9075,
+  "feature_importance": {
+    "seismic_zone": 0.19963757864729398,
+    "recent_quakes_30d": 0.1441406861311451,
+    "ground_acceleration_g": 0.13054532343779646,
+    "fault_distance_km": 0.1095326341011431,
+    "soil_type": 0.09400909038862051,
+    "historical_count_5y": 0.07904818462742914,
+    "max_recent_magnitude": 0.043589781306405805,
+    "bedrock_depth_m": 0.03426686480995675,
+    "building_age_years": 0.03151148311942035,
+    "population_density": 0.031122703084893795,
+    "p_wave_velocity_kms": 0.029276194296203605,
+    "s_wave_velocity_kms": 0.02785636236282954,
+    "hour_of_day": 0.024868724875287962,
+    "month": 0.020594388811573716
+  },
+  "risk_levels": {
+    "0": "Safe",
+    "1": "Warning",
+    "2": "High Risk",
+    "3": "Critical"
+  }
+}

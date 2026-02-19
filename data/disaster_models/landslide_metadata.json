@@ -1,0 +1,46 @@
+{
+  "disaster_type": "landslide",
+  "features": [
+    "slope_angle_deg",
+    "rainfall_24h_mm",
+    "rainfall_7d_mm",
+    "soil_moisture_percent",
+    "soil_cohesion_kpa",
+    "soil_friction_angle",
+    "vegetation_cover_pct",
+    "elevation_m",
+    "historical_landslides",
+    "soil_type",
+    "deforestation",
+    "groundwater_depth_m",
+    "seismic_activity",
+    "month"
+  ],
+  "n_features": 14,
+  "n_samples_train": 1600,
+  "n_samples_test": 400,
+  "train_accuracy": 0.994375,
+  "test_accuracy": 0.8875,
+  "feature_importance": {
+    "slope_angle_deg": 0.1875147735682623,
+    "rainfall_24h_mm": 0.18048157277554547,
+    "soil_moisture_percent": 0.14050668613150213,
+    "rainfall_7d_mm": 0.1399448225545663,
+    "vegetation_cover_pct": 0.07226677412991642,
+    "soil_type": 0.0642794033073499,
+    "month": 0.04252032179560516,
+    "elevation_m": 0.03063962398823998,
+    "soil_cohesion_kpa": 0.02896755709716779,
+    "groundwater_depth_m": 0.028503634175645144,
+    "soil_friction_angle": 0.027870391477147358,
+    "seismic_activity": 0.02770772096673797,
+    "deforestation": 0.016608102286867325,
+    "historical_landslides": 0.012188615745446598
+  },
+  "risk_levels": {
+    "0": "Safe",
+    "1": "Warning",
+    "2": "High Risk",
+    "3": "Critical"
+  }
+}
