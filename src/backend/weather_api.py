@@ -21,6 +21,17 @@ class WeatherAPIClient:
             api_key: OpenWeatherMap API key (get free at openweathermap.org)
         """
         self.api_key = api_key or os.environ.get('OPENWEATHER_API_KEY')
+        
+        # Fallback to Streamlit Secrets for cloud deployment
+        if not self.api_key:
+            try:
+                import streamlit as st
+                if 'OPENWEATHER_API_KEY' in st.secrets:
+                    self.api_key = st.secrets['OPENWEATHER_API_KEY']
+                    print("✅ Weather API key loaded from st.secrets")
+            except Exception:
+                pass
+
         self.base_url = "https://api.openweathermap.org/data/2.5"
         
         # Cache to avoid hitting rate limits
