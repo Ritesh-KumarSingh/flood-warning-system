@@ -55,7 +55,10 @@ class WeatherAPIClient:
                 return cached_data
         
         if self.demo_mode:
-            return self._get_demo_weather(city)
+            demo = self._get_demo_weather(city)
+            # Cache demo data the same way real data is cached
+            self._cache[cache_key] = (demo, datetime.now())
+            return demo
         
         try:
             # Build API URL
@@ -119,10 +122,20 @@ class WeatherAPIClient:
         return city_coords.get(city_lower, (26.8467, 80.9462))  # Default to Lucknow
     
     def _get_demo_weather(self, city: str) -> Dict:
-        """Generate demo weather data"""
-        import random
+        """Generate deterministic demo weather data.
         
-        # Realistic demo data
+        Values are seeded by city name + current hour so they stay
+        stable across refreshes within the same hour.
+        """
+        import random as _rng
+        import hashlib
+
+        # Seed: city (case-insensitive) + date + hour → stable per hour
+        now = datetime.now()
+        seed_str = f"{city.lower()}_{now.strftime('%Y%m%d%H')}"
+        seed = int(hashlib.md5(seed_str.encode()).hexdigest(), 16) % (2**32)
+        gen = _rng.Random(seed)
+
         demo_data = {
             'coord': {'lat': 26.8467, 'lon': 80.9462},
             'weather': [
@@ -133,21 +146,21 @@ class WeatherAPIClient:
                 }
             ],
             'main': {
-                'temp': random.uniform(20, 35),
-                'feels_like': random.uniform(20, 35),
-                'temp_min': random.uniform(18, 30),
-                'temp_max': random.uniform(25, 38),
-                'pressure': random.uniform(1000, 1020),
-                'humidity': random.uniform(40, 90)
+                'temp': round(gen.uniform(20, 35), 1),
+                'feels_like': round(gen.uniform(20, 35), 1),
+                'temp_min': round(gen.uniform(18, 30), 1),
+                'temp_max': round(gen.uniform(25, 38), 1),
+                'pressure': round(gen.uniform(1000, 1020), 1),
+                'humidity': round(gen.uniform(40, 90), 1)
             },
             'wind': {
-                'speed': random.uniform(2, 15),
-                'deg': random.randint(0, 360)
+                'speed': round(gen.uniform(2, 15), 1),
+                'deg': gen.randint(0, 360)
             },
             'rain': {
-                '1h': random.uniform(0, 25)
+                '1h': round(gen.uniform(0, 25), 1)
             },
-            'dt': int(datetime.now().timestamp()),
+            'dt': int(now.timestamp()),
             'name': city
         }
         
@@ -299,3 +312,4 @@ def test_weather_api():
 
 if __name__ == "__main__":
     test_weather_api()
+

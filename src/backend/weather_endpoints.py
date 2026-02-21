@@ -13,6 +13,7 @@ weather_router = APIRouter(prefix="/live", tags=["Live Weather"])
 
 # Initialize weather client (will be set on startup)
 weather_client = None
+assessor = None
 
 
 class LivePredictionRequest(BaseModel):
@@ -43,11 +44,12 @@ class LivePredictionResponse(BaseModel):
     processing_time_ms: float
 
 
-@weather_router.on_event("startup")
-async def init_weather_client():
-    """Initialize weather client on startup"""
-    global weather_client
+def init_weather_client():
+    """Initialize weather client and assessor. Call from app startup."""
+    global weather_client, assessor
     weather_client = WeatherAPIClient()
+    from flood_assessment import FloodRiskAssessor
+    assessor = FloodRiskAssessor()
 
 
 @weather_router.post("/predict-city", response_model=LivePredictionResponse)
@@ -79,9 +81,11 @@ async def predict_from_city(request: LivePredictionRequest):
             request.city
         )
         
-        # Make prediction using the assessor
-        from flood_assessment import FloodRiskAssessor
-        assessor = FloodRiskAssessor()
+        if assessor is None:
+            raise HTTPException(
+                status_code=503,
+                detail="Assessor not initialized"
+            )
         
         assessment = assessor.assess_flood_risk(
             features,

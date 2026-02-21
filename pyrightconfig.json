@@ -1,0 +1,9 @@
+{
+    "venvPath": "e:/disaster_management_antigravity/disaster-warning-platform",
+    "venv": "venv",
+    "reportMissingImports": true,
+    "pythonVersion": "3.13",
+    "extraPaths": [
+        "src"
+    ]
+}

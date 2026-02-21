@@ -101,14 +101,19 @@ def get_risk_info(risk_level: int) -> dict:
     """Get detailed information about a risk level"""
     return RISK_LEVELS.get(risk_level, RISK_LEVELS[0])
 
-def validate_features(features: dict) -> bool:
-    """Validate that all features are within expected ranges"""
+def validate_features(features: dict) -> dict:
+    """Validate features and return details about any failures.
+    
+    Returns:
+        dict with 'valid' (bool) and 'errors' (dict of feature → reason)
+    """
+    errors = {}
     for feature, value in features.items():
         if feature in FEATURE_RANGES:
             min_val, max_val = FEATURE_RANGES[feature]
             if not (min_val <= value <= max_val):
-                return False
-    return True
+                errors[feature] = f"Value {value} outside range [{min_val}, {max_val}]"
+    return {"valid": len(errors) == 0, "errors": errors}
 
 # Example usage:
 if __name__ == "__main__":

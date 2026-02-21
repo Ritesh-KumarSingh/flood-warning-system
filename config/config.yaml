@@ -1,7 +1,7 @@
 # API Configuration
 weather_api:
   base_url: "https://api.openweathermap.org/data/2.5"
-  api_key: "5b39cb7683e4ffc4d39df357c4636adf"  # Get free key from openweathermap.org
+  api_key: "YOUR_API_KEY_HERE"  # Get free key from openweathermap.org
 
 # Model Configuration
 model:
@@ -29,45 +29,3 @@ paths:
   raw_data: "data/raw/flood_data.csv"
   processed_data: "data/processed/clean_data.csv"
   model_save: "data/models/flood_model.pkl"
-```
-
----
-
-## **STEP 7: Create .gitignore**
-
-Create `.gitignore` file:
-```
-# Python
-__pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
-venv/
-env/
-ENV/
-
-# Jupyter Notebooks
-.ipynb_checkpoints
-
-# Data files (don't commit large datasets)
-*.csv
-*.pkl
-*.h5
-*.parquet
-
-# Config with secrets
-config/secrets.yaml
-.env
-
-# Logs
-logs/
-*.log
-
-# OS
-.DS_Store
-Thumbs.db
-
-# IDE
-.vscode/
-.idea/

@@ -16,7 +16,10 @@ for _p in (_ML_DIR, _UTILS_DIR, _BACKEND_DIR):
         sys.path.insert(0, _p)
 
 from predict import get_predictor          # â† factory, never raises FileNotFoundError
-from risk_scoring import RiskScorer, format_alert_for_display
+try:
+    from risk_scoring import RiskScorer, format_alert_for_display
+except ImportError:
+    from .risk_scoring import RiskScorer, format_alert_for_display
 from typing import Dict, Optional
 
 

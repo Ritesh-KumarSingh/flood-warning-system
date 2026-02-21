@@ -8,11 +8,14 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 import time
 from datetime import datetime
-import sys
 import os
+from contextlib import asynccontextmanager
 
-# Add parent directory to path
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+# Ensure backend dir is on the path for sibling imports
+import sys
+_backend_dir = os.path.dirname(os.path.abspath(__file__))
+if _backend_dir not in sys.path:
+    sys.path.insert(0, _backend_dir)
 
 from models import (
     PredictionRequest, PredictionResponse, HealthResponse,
@@ -21,40 +24,26 @@ from models import (
 )
 from flood_assessment import FloodRiskAssessor
 
-# Initialize FastAPI app
-app = FastAPI(
-    title="Flood Early Warning API",
-    description="AI-powered flood prediction and early warning system",
-    version="1.0.0",
-    docs_url="/docs",
-    redoc_url="/redoc"
-)
-
-# Configure CORS (allow frontend to access API)
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],  # In production, specify actual origins
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
 # Global assessor instance
 assessor = None
 
-
-@app.on_event("startup")
-async def startup_event():
-    """Initialize ML model on startup"""
+# --- Lifespan (replaces deprecated @app.on_event) ---
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """Startup / shutdown lifecycle"""
     global assessor
     try:
         print("\n" + "="*70)
         print(" "*20 + "🚀 STARTING FLOOD WARNING API")
         print("="*70 + "\n")
-        
+
         # Initialize assessor (loads model)
         assessor = FloodRiskAssessor()
-        
+
+        # Initialize weather endpoints client + assessor
+        from weather_endpoints import init_weather_client
+        init_weather_client()
+
         print("✅ API started successfully!")
         print(f"📍 Docs available at: http://localhost:8000/docs")
         print(f"📍 Health check: http://localhost:8000/health")
@@ -63,6 +52,30 @@ async def startup_event():
         print(f"❌ Error during startup: {e}")
         import traceback
         traceback.print_exc()
+
+    yield  # app runs here
+
+# Initialize FastAPI app
+app = FastAPI(
+    title="Flood Early Warning API",
+    description="AI-powered flood prediction and early warning system",
+    version="1.0.0",
+    docs_url="/docs",
+    redoc_url="/redoc",
+    lifespan=lifespan,
+)
+
+# Configure CORS (allow frontend to access API)
+_cors_origins = os.environ.get(
+    "CORS_ORIGINS", "http://localhost:8501,http://localhost:3000"
+).split(",")
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=_cors_origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 @app.exception_handler(Exception)

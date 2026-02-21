@@ -5,8 +5,12 @@ Converts model predictions into actionable risk assessments with alerts
 
 from typing import Dict, List, Optional
 from datetime import datetime
-from schema import (RISK_LEVELS, RISK_THRESHOLDS, CRITICAL_THRESHOLDS,
-                   get_risk_level_from_probability, get_risk_info)
+try:
+    from schema import (RISK_LEVELS, RISK_THRESHOLDS, CRITICAL_THRESHOLDS,
+                       get_risk_level_from_probability, get_risk_info)
+except ImportError:
+    from .schema import (RISK_LEVELS, RISK_THRESHOLDS, CRITICAL_THRESHOLDS,
+                        get_risk_level_from_probability, get_risk_info)
 
 
 class RiskScorer:

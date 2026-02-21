@@ -3,7 +3,7 @@ API Models
 Pydantic models for request/response validation
 """
 
-from pydantic import BaseModel, Field, validator
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Dict, List, Optional
 from datetime import datetime
 
@@ -84,23 +84,22 @@ class FloodFeaturesInput(BaseModel):
         description="Month of year (1-12)"
     )
     
-    class Config:
-        schema_extra = {
-            "example": {
-                "rainfall_mm": 150.0,
-                "rainfall_7day_avg": 95.0,
-                "rainfall_intensity": 15.0,
-                "river_level_m": 9.5,
-                "river_level_change": 1.8,
-                "soil_moisture_percent": 85.0,
-                "elevation_m": 45.0,
-                "temperature_celsius": 26.0,
-                "humidity_percent": 88.0,
-                "wind_speed_kmh": 12.0,
-                "distance_to_river_km": 1.2,
-                "month": 7
-            }
+    model_config = ConfigDict(json_schema_extra={
+        "example": {
+            "rainfall_mm": 150.0,
+            "rainfall_7day_avg": 95.0,
+            "rainfall_intensity": 15.0,
+            "river_level_m": 9.5,
+            "river_level_change": 1.8,
+            "soil_moisture_percent": 85.0,
+            "elevation_m": 45.0,
+            "temperature_celsius": 26.0,
+            "humidity_percent": 88.0,
+            "wind_speed_kmh": 12.0,
+            "distance_to_river_km": 1.2,
+            "month": 7
         }
+    })
 
 
 class PredictionRequest(BaseModel):
@@ -186,25 +185,24 @@ class QuickCheckRequest(BaseModel):
     
     features: FloodFeaturesInput
     
-    class Config:
-        schema_extra = {
-            "example": {
-                "features": {
-                    "rainfall_mm": 150.0,
-                    "rainfall_7day_avg": 95.0,
-                    "rainfall_intensity": 15.0,
-                    "river_level_m": 9.5,
-                    "river_level_change": 1.8,
-                    "soil_moisture_percent": 85.0,
-                    "elevation_m": 45.0,
-                    "temperature_celsius": 26.0,
-                    "humidity_percent": 88.0,
-                    "wind_speed_kmh": 12.0,
-                    "distance_to_river_km": 1.2,
-                    "month": 7
-                }
+    model_config = ConfigDict(json_schema_extra={
+        "example": {
+            "features": {
+                "rainfall_mm": 150.0,
+                "rainfall_7day_avg": 95.0,
+                "rainfall_intensity": 15.0,
+                "river_level_m": 9.5,
+                "river_level_change": 1.8,
+                "soil_moisture_percent": 85.0,
+                "elevation_m": 45.0,
+                "temperature_celsius": 26.0,
+                "humidity_percent": 88.0,
+                "wind_speed_kmh": 12.0,
+                "distance_to_river_km": 1.2,
+                "month": 7
             }
         }
+    })
 
 
 class QuickCheckResponse(BaseModel):
