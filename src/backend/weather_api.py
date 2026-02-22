@@ -6,6 +6,9 @@ Fetches real-time weather data from OpenWeatherMap
 import requests
 import os
 from typing import Dict, Optional, Tuple
+from dotenv import load_dotenv
+
+load_dotenv()
 from datetime import datetime, timedelta
 import json
 
