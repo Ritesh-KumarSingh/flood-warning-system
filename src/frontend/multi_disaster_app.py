@@ -77,25 +77,28 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# Initialize session state
-if 'weather_client' not in st.session_state:
-    st.session_state.weather_client = WeatherAPIClient()
-if 'predictor' not in st.session_state:
-    st.session_state.predictor = MultiDisasterPredictor()
-if 'selected_disaster' not in st.session_state:
-    st.session_state.selected_disaster = 'flood'
 
-# NEW: Initialize feature modules
-if 'resource_locator' not in st.session_state:
-    st.session_state.resource_locator = EmergencyResourceLocator()
-if 'translator' not in st.session_state:
-    st.session_state.translator = LanguageTranslator()
-if 'historical' not in st.session_state:
-    st.session_state.historical = HistoricalDataAnalyzer()
-if 'reporter' not in st.session_state:
-    st.session_state.reporter = CommunityReporter()
-if 'language' not in st.session_state:
-    st.session_state.language = 'en'
+# ─── Initialize session state ────────────────────────────────────────────────
+def _init_session_state():
+    """Initialize all session state variables. Must be called on every run."""
+    if 'weather_client' not in st.session_state:
+        st.session_state.weather_client = WeatherAPIClient()
+    if 'predictor' not in st.session_state:
+        st.session_state.predictor = MultiDisasterPredictor()
+    if 'selected_disaster' not in st.session_state:
+        st.session_state.selected_disaster = 'flood'
+
+    # Feature modules
+    if 'resource_locator' not in st.session_state:
+        st.session_state.resource_locator = EmergencyResourceLocator()
+    if 'translator' not in st.session_state:
+        st.session_state.translator = LanguageTranslator()
+    if 'historical' not in st.session_state:
+        st.session_state.historical = HistoricalDataAnalyzer()
+    if 'reporter' not in st.session_state:
+        st.session_state.reporter = CommunityReporter()
+    if 'language' not in st.session_state:
+        st.session_state.language = 'en'
 
 
 # ─── Login / Register page ──────────────────────────────────────────────────
@@ -175,6 +178,9 @@ def show_login_page():
 
 def main():
     """Main application"""
+
+    # Initialize session state on every run (critical for Streamlit Cloud)
+    _init_session_state()
 
     # ── Auth gate ──
     if not auth.is_logged_in(st.session_state):
